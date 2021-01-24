@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL13;
+
+import lwjgl3.GLWindow;
+import lwjgl3.GuiTexture;
+import lwjgl3.Loader;
+import lwjgl3.RenderGui;
+import lwjgl3.lwjgl3;
+
+public class Game {
+	private static Loader loader;								//Loader
+	private static GLWindow window;								//Main Window
+	private static RenderGui renderGui;							//Gui renderer
+	private static List<GuiTexture> guis;						//The total list of guis
+	
+	public static void Initalize()
+	{
+		System.out.println("Game initalizing...");				//Debug print
+		lwjgl3.Initalize();										//LWJGL3 initialize
+		
+		window = new GLWindow(800, 600, "Hello World!"); 		//Create a opengl window
+		window.create();										//Create the window
+		window.clearColor(1,.5,0.25f,1);
+		window.isBorderless(true);
+		
+		loader = new Loader();									//Create a new loaer
+		
+		renderGui = new RenderGui(loader);						//Handle a new gui loader
+		guis = new ArrayList<GuiTexture>();						//Create the list of guis
+		guis.add(new GuiTexture("/test.png"));					//Add the gui texture
+		
+		System.out.println("Game initalized!");					//Debug print
+	}
+	
+	public static void Update(double dElapesed)
+	{ 
+		//Poll lwjgl3 											//
+		lwjgl3.Poll();											//Poll for updates
+
+		//Basic game code
+		
+		//Basic updates											//
+		Engine.shouldDetroy(window.update()); 					//Update the window
+	}
+	
+	public static void Draw(double dElapesed)
+	{
+		//Draw a quad											// 
+        GL13.glClear(GL13.GL_COLOR_BUFFER_BIT);
+        
+		renderGui.render(guis);									//Render the list of guis	
+	}
+	
+	public static void Destroy()
+	{
+		renderGui.cleanup();
+	}
+}

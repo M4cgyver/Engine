@@ -1,0 +1,14 @@
+package collision;
+
+public class PhysicsAlgorithm {
+
+	public static PhysicsCollisionPoint FindCollisionPoints(PhysicsSphereCollider a, PhysicsTransform ta, PhysicsSphereCollider b, PhysicsTransform tb)
+	{ 
+		
+	}
+
+	public static PhysicsCollisionPoint FindCollisionPoints(PhysicsSphereCollider a, PhysicsTransform ta, PhysicsPlaneCollider b, PhysicsTransform tb)
+	{ 
+		
+	}
+}

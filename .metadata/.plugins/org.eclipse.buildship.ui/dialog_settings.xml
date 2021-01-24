@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.buildship.ui.wizard.project.import">
+		<item key="apply_working_sets" value="false"/>
+		<item key="project_location" value="C:\Users\lrios\Downloads\libgdx\test"/>
+		<item key="offline_mode" value="false"/>
+		<item key="build_scans" value="true"/>
+		<list key="working_sets">
+		</list>
+	</section>
+</section>

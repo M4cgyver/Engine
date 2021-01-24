@@ -1,0 +1,16 @@
+package collision;
+
+import java.util.ArrayList;
+
+import org.lwjglx.util.vector.Vector3f;
+
+public class PhysicsWorld {
+	private ArrayList<PhysicsObject> objects;
+	private Vector3f gravity;
+	
+	public PhysicsWorld()
+	{
+		objects = new ArrayList<PhysicsObject>();
+		gravity = new Vector3f(0,-10,0);
+	}
+}

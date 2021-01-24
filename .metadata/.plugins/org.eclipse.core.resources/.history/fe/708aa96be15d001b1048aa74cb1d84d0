@@ -1,0 +1,9 @@
+package collision;
+
+public class PhysicsAlgorithm {
+
+	public static PhysicsCollisionPoint FindCollisionPoints(PhysicsSphereCollider)
+	{ 
+		
+	}
+}

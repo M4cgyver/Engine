@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 packages to &apos;Base/src&apos;&#x0D;&#x0A;- Original project: &apos;lwjgl3-awt&apos;&#x0D;&#x0A;- Destination element: &apos;Base/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     lwjgl3-awt/src/org.lwjgl.awthacks&#x0D;&#x0A;     lwjgl3-awt/src/org.lwjgl.opengl.awt&#x0D;&#x0A;     lwjgl3-awt/src/org.lwjgl.vulkan.awt" description="Copy packages" destination="=Base/src" element1="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;org.lwjgl.awthacks" element2="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;org.lwjgl.opengl.awt" element3="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;org.lwjgl.vulkan.awt" flags="589830" fragments="3" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1610610836983" version="1.0"/>
+</session>

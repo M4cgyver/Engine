@@ -1,0 +1,6 @@
+package collision;
+
+public class PhysicsCollision {
+	public PhysicsObject objA, objB;
+	public PhysicsCollisionPoints points;
+}

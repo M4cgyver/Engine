@@ -1,0 +1,105 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL13;
+import org.lwjglx.util.vector.Vector2f;
+import org.lwjglx.util.vector.Vector3f;
+
+import lwjgl3.Camera;
+import lwjgl3.Entity;
+import lwjgl3.GLTexture;
+import lwjgl3.GLWindow;
+import lwjgl3.GuiTexture;
+import lwjgl3.Loader;
+import lwjgl3.ModleRaw;
+import lwjgl3.ModleTexture;
+import lwjgl3.ObjectLoader;
+import lwjgl3.Render;
+import lwjgl3.RenderGui;
+import lwjgl3.ShaderBasic;
+import lwjgl3.lwjgl3;
+
+public class Game {
+	private static Loader 			loader;					//Loader
+	private static GLWindow 		window;					//Main Window
+	private static Camera 			camera;					//default camera
+	private static Entity			entity;					//basic entity
+	private static ShaderBasic		shBasic;				//basic shader
+	private static Render			renderer;				//The renderer 
+	private static RenderGui 		renderGui;				//Gui renderer
+	private static List<GuiTexture>	guis;					//The total list of guis
+	
+	public static void Initalize()
+	{
+		System.out.println("Game initalizing...");				//Debug print
+
+		loader = new Loader();									//Create a new loaer
+		
+		window = new GLWindow(800, 600, "Hello World!"); 		//Create a opengl window
+		window.windowHint(GLFW.GLFW_RESIZABLE, 0);				//Set resizable to false
+		window.create(true);									//Create the window
+		window.isBorderless(true);								//Set the window to borderless 
+		window.swapInterval = 1;								//Enable vsync
+		Engine.fFps = 0;										//Uncap the fps from the engine since we enabled vsync
+		
+		camera = new Camera();									//Create a new camera instance
+		
+		shBasic = new ShaderBasic();							//Make a new shader wit the basic instance
+		 
+		try {
+			ModleRaw mCard = ObjectLoader.loadObjModleFromJar("/objects/table.obj", loader);
+			ModleTexture mtexture 	= new ModleTexture(mCard, new GLTexture(loader.loadTexture("/objects/table.png")));
+			entity = new Entity(mtexture, new Vector3f(0,-5,-15),0,0,0,3);
+		} catch (IOException e) { 
+			e.printStackTrace();
+		}
+		
+		renderer = new Render(800,600);							//Make a new instance of the renderer
+		
+		renderGui = new RenderGui(loader);						//Handle a new gui loader
+		guis = new ArrayList<GuiTexture>();						//Create the list of guis
+		guis.add(new GuiTexture("/test.png"));					//Add the gui texture
+		guis.get(0).position = new Vector2f(.5f, 0.5f);			//Set the position
+		guis.get(0).scale = new Vector2f(.25f, 0.25f);			//Set the scale
+		
+		System.out.println("Game initalized!");					//Debug print
+	}
+	
+	public static void Update(double dElapesed)
+	{ 
+		//Poll lwjgl3 											//
+		lwjgl3.Poll();											//Poll for updates
+
+		//Basic game code										//
+		camera.move(dElapesed);									//move the camera given elapsed time
+		
+		//Basic updates											//
+		Engine.shouldDetroy(window.update()); 					//Update the window
+	}
+	
+	public static void Draw(double dElapesed)
+	{
+		//Clear the screen										//
+		float fm = (float) ((Engine.dElapsed*0.001)%1);			//Get the multiple
+		window.clearColor(1f*fm,.5f*fm,.25f*fm,0f);				//Set the clear color 
+        GL13.glClear(GL13.GL_COLOR_BUFFER_BIT);					//Clear the console
+        
+        //Draw the 3d view										//
+		renderer.prepare();										//Prepair the renderer
+        shBasic.start();										//Start the basic shader
+		shBasic.loadViewMatrix(camera);							//Load the projection matrix of the camera
+		renderer.render(entity, shBasic);						//Render the table
+		//renderer.render(eTable, shBasic);						//Load the table entity
+		
+        
+        //Draw the GUI
+		renderGui.render(guis);									//Render the list of guis	
+	}
+	
+	public static void Destroy()
+	{
+		renderGui.cleanup();
+	}
+}

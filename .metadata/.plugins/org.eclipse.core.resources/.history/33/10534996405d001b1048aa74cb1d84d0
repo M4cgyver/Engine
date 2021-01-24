@@ -1,0 +1,35 @@
+package collision;
+
+import java.util.ArrayList;
+
+import org.lwjglx.util.vector.Vector3f;
+
+public class PhysicsWorld {
+	private ArrayList<PhysicsObject> objects;
+	private Vector3f gravity;
+	
+	public PhysicsWorld()
+	{
+		objects = new ArrayList<PhysicsObject>();
+		gravity = new Vector3f(0,-10,0);
+	}
+	
+	public void Step(double varry)
+	{
+		for(PhysicsObject obj : objects)
+		{
+			obj.force.x += obj.mass * gravity.x;
+			obj.force.y += obj.mass * gravity.y;
+			obj.force.z += obj.mass * gravity.z;
+
+			obj.velocity.x += obj.force.x / obj.mass * varry;
+			obj.velocity.y += obj.force.y / obj.mass;
+			obj.velocity.z += obj.force.z / obj.mass;
+			
+
+			obj.force.x += obj.mass * gravity.x;
+			obj.force.y += obj.mass * gravity.y;
+			obj.force.z += obj.mass * gravity.z;
+		}
+	}
+}

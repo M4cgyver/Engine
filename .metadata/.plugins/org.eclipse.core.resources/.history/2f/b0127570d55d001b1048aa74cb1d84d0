@@ -1,0 +1,15 @@
+package collision;
+
+public abstract class PhysicsCollider {
+	public abstract PhysicsCollisionPoint TestCollision( PhysicsTransform transform, PhysicsCollider collider,	PhysicsTransform colliderTransform);
+	 
+	public abstract PhysicsCollisionPoint TestCollision(
+			PhysicsTransform* transform,
+			PhysicsSphereCollider* sphere,
+			PhysicsTransform* sphereTransform) const = 0;
+	 
+	public abstract PhysicsCollisionPoint TestCollision(
+			const Transform* transform,
+			const PlaneCollider* plane,
+			const Transform* planeTransform) const = 0;
+}

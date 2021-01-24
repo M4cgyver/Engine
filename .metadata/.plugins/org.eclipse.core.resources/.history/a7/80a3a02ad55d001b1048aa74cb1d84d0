@@ -1,0 +1,18 @@
+package collision;
+
+public class PhysicsCollider {
+	public CollisionPoints TestCollision(
+			Transfor* transform,
+			Collider collider,
+			Transform colliderTransform) const = 0;
+	 
+		virtual CollisionPoints TestCollision(
+			const Transform* transform,
+			const SphereCollider* sphere,
+			const Transform* sphereTransform) const = 0;
+	 
+		virtual CollisionPoints TestCollision(
+			const Transform* transform,
+			const PlaneCollider* plane,
+			const Transform* planeTransform) const = 0;
+}
